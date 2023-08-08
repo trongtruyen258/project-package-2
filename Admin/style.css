@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 5px;
+}
+body {
+  display: grid;
+  gap: 15px;
+  padding: 10px;
+  grid-template-columns: 15% auto;
+  grid-template-rows: auto 60px auto;
+}
+.nav_left {
+  grid-area: 2/1/4/2;
+}
+.nav_left h3 {
+  margin: 15px 0;
+}
+.nav {
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid black;
+}
+.nav_item {
+  padding: 10px;
+  list-style: none;
+  border-radius: 0;
+  border-bottom: 1px solid;
+}
+.nav_item:last-child {
+  border-bottom: none;
+}
+.nav_left form {
+  border: 1px solid;
+  padding: 15px;
+}
+.nav_left input {
+  margin-bottom: 15px;
+  width: 90%;
+}
+.nav_left button {
+  padding: 5px;
+  border-radius: 5px;
+}
+.search {
+  grid-area: 2/2/3/3;
+  border: 1px solid black;
+  padding: 15px;
+}
+.search input {
+  width: 60%;
+}
+.search button {
+  background-color: green;
+  color: #fff;
+  width: 70px;
+  border-radius: 5px;
+}
+.main {
+  border: 1px solid;
+  grid-area: 3/2/4/3;
+  padding: 10px;
+  position: relative;
+}
+.main .nav_pagi {
+  position: absolute;
+  bottom: 0;
+}
+.main > button {
+  background: blue;
+  color: #fff;
+  width: 90px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+table {
+  text-align: center;
+}
+tbody tr {
+  border-top: 1px solid;
+}
+th,
+td {
+  padding: 10px;
+}
+.bnt_edit {
+  padding: 0 10px;
+  background: orange;
+  color: #fff;
+  border-radius: 5px;
+}
+.bnt_del {
+  padding: 0 10px;
+  background: red;
+  color: #fff;
+  border-radius: 5px;
+}

@@ -1,0 +1,25 @@
+@import "var";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+header {
+  .navbar {
+    background-color: $nav_bg !important;
+    .nav_end {
+      position: absolute;
+      right: 0;
+      .nav-item {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+.banner {
+  img {
+    width: 100%;
+  }
+  padding-bottom: 30px;
+}
