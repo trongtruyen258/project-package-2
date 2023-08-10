@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header .navbar {
+  background-color: #fed100 !important;
+}
+header .navbar .nav_end {
+  position: absolute;
+  right: 0;
+}
+header .navbar .nav_end .nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.banner {
+  padding-bottom: 30px;
+}
+.banner img {
+  width: 100%;
+}
+
+.container .product_img img {
+  max-width: 100%;
+}
+.container .product_info .rating {
+  color: #ffa500;
+}
+.container .product_info .price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container .product_info .price p {
+  margin: 0;
+}
+.container .product_info .price button {
+  border: none;
+  margin-right: 20px;
+}/*# sourceMappingURL=style.css.map */

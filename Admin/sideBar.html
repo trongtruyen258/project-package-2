@@ -1,0 +1,56 @@
+<nav class="nav_left">
+  <h4>Danh mục</h4>
+  <ul class="nav">
+    <li class="nav_item">
+      <button type="button" onclick="handleShowManufacturer()">
+        Manufacturer
+      </button>
+    </li>
+    <li class="nav_item">
+      <button type="button" onclick="handleShowCategory()">Category</button>
+    </li>
+    <li class="nav_item">
+      <button type="button" onclick="handleShowProduct()">Product</button>
+    </li>
+    <li class="nav_item">
+      <button type="button" onclick="handleShowAccount()">Account</button>
+    </li>
+  </ul>
+  <h4>Manufacturers</h4>
+  <ul class="nav">
+    <li class="nav_item">
+      <button type="button" onclick="handleShowManufacturerSamsung()">
+        SAMSUNG
+      </button>
+    </li>
+    <li class="nav_item">
+      <button type="button" onclick="handleShowManufacturerApple()">
+        APPLE
+      </button>
+    </li>
+    <li class="nav_item">
+      <button type="button" onclick="handleShowManufacturerXiaomi()">
+        XIAOMI
+      </button>
+    </li>
+    <li class="nav_item">
+      <button type="button" onclick="handleShowManufacturerOppo()">OPPO</button>
+    </li>
+  </ul>
+  <h4>Categorys</h4>
+  <form action="" method="get">
+    <input
+      list="categorys"
+      name="category"
+      id="category"
+      placeholder="--Select category--"
+    />
+    <datalist id="categorys">
+      <option value="Tablet"></option>
+      <option value="Phone"></option>
+      <option value="Laptop"></option>
+    </datalist>
+
+    <button type="submit">Fillter</button>
+  </form>
+</nav>
