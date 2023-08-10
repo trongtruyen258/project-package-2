@@ -1,0 +1,296 @@
+<button type="button" class="btn btn-info" onclick="handleCreateProduct()">
+  Add New
+</button>
+<table>
+  <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Info</th>
+    <th>Detail</th>
+    <th>Star</th>
+    <th>Image</th>
+    <th>NSX</th>
+    <th>Category</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody id="tbProductAdmin"></tbody>
+</table>
+<!-- Modal -->
+<!-- Modal create product -->
+<div id="ModalCreateProduct" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5">Create New Product</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Name"
+              placeholder="Input Name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Price</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Price"
+              placeholder="Input Price"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Info</label>
+            <textarea
+              class="form-control"
+              rows="3"
+              id="Info"
+              placeholder="Input Info"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="">Detail</label>
+            <textarea
+              class="form-control"
+              rows="5"
+              id="Detail"
+              placeholder="Input Detail"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="">Star</label>
+            <input
+              type="number"
+              class="form-control"
+              id="Star"
+              placeholder="Input Star"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Image</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Image"
+              placeholder="Input Image"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Manufacturer</label>
+            <select
+              name=""
+              id="Manufacturer"
+              class="form-control"
+              required="required"
+            >
+              <option value="0">Choose a Manufacturer</option>
+              <option value="SAMSUNG">SAMSUNG</option>
+              <option value="APPLE">APPLE</option>
+              <option value="XIAOMI">XIAOMI</option>
+              <option value="OPPO">OPPO</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="">Category</label>
+            <select
+              name=""
+              id="Category"
+              class="form-control"
+              required="required"
+            >
+              <option value="0">Choose a Category</option>
+              <option value="Điện thoại">Điện thoại</option>
+              <option value="Tablet">Tablet</option>
+              <option value="Laptop">Laptop</option>
+            </select>
+          </div>
+
+          <br />
+          <div class="form-group text-end">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="CreateNewProduct()"
+            >
+              Save
+            </button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Update Product -->
+<div id="ModalUpdateProduct" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5">Update Product</h4>
+      </div>
+      <div class="modal-body">
+        <!-- <p>Some text in the modal.</p> -->
+
+        <form>
+          <div class="form-group">
+            <label for="">Id</label>
+            <input
+              type="number"
+              class="form-control"
+              id="IdUpdate"
+              placeholder="Input Id"
+              disabled
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="NameUpdate"
+              placeholder="Input Name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Price</label>
+            <input
+              type="text"
+              class="form-control"
+              id="PriceUpdate"
+              placeholder="Input Price"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Info</label>
+            <textarea
+              class="form-control"
+              rows="3"
+              id="InfoUpdate"
+              placeholder="Input Info"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="">Detail</label>
+            <textarea
+              class="form-control"
+              rows="5"
+              id="DetailUpdate"
+              placeholder="Input Detail"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="">Star</label>
+            <input
+              type="number"
+              class="form-control"
+              id="StarUpdate"
+              placeholder="Input Star"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Image</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ImageUpdate"
+              placeholder="Input Image"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Manufacturer</label>
+            <select
+              name=""
+              id="ManufacturerUpdate"
+              class="form-control"
+              required="required"
+            >
+              <option value="0">Choose a Manufacturer</option>
+              <option value="1">SAMSUNG</option>
+              <option value="2">IPHONE</option>
+              <option value="3">XIAOMI</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="">Category</label>
+            <select
+              name=""
+              id="CategoryUpdate"
+              class="form-control"
+              required="required"
+            >
+              <option value="0">Choose a Category</option>
+              <option value="1">Điện thoại</option>
+              <option value="2">Tablet</option>
+              <option value="3">Laptop</option>
+            </select>
+          </div>
+          <br />
+          <div class="form-group text-end">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="handleUpdateProduct()"
+            >
+              Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              onclick="handleResetUpdate()"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+</div>
+<nav class="nav_pagi">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">1</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">4</a></li>
+    <li class="page-item"><a class="page-link" href="#">5</a></li>
+  </ul>
+</nav>

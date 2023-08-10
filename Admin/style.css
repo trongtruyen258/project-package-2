@@ -7,12 +7,29 @@
 body {
   display: grid;
   gap: 15px;
-  padding: 10px;
+  padding: 0 10px 10px;
   grid-template-columns: 15% auto;
   grid-template-rows: auto 60px auto;
 }
-.nav_left {
+header {
+  grid-area: 1/1/2/3;
+}
+header .navbar {
+  background-color: #fed100 !important;
+}
+header .navbar .nav_end {
+  position: absolute;
+  right: 0;
+}
+header .navbar .nav_end .nav-item {
+  display: flex;
+  align-items: center;
+}
+#side_bar {
   grid-area: 2/1/4/2;
+}
+.nav_left {
+  flex-direction: column;
 }
 .nav_left h3 {
   margin: 15px 0;
@@ -21,6 +38,11 @@ body {
   flex-direction: column;
   text-align: center;
   border: 1px solid black;
+}
+.nav button {
+  border: none;
+  background-color: white;
+  width: 100%;
 }
 .nav_item {
   padding: 10px;
@@ -46,10 +68,13 @@ body {
 .search {
   grid-area: 2/2/3/3;
   border: 1px solid black;
-  padding: 15px;
+  padding: 0 15px;
+  display: grid;
+  align-items: center;
 }
 .search input {
   width: 60%;
+  display: inline-block;
 }
 .search button {
   background-color: green;
@@ -67,18 +92,12 @@ body {
   position: absolute;
   bottom: 0;
 }
-.main > button {
-  background: blue;
-  color: #fff;
-  width: 90px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
 table {
   text-align: center;
+  width: 100%;
 }
-tbody tr {
-  border-top: 1px solid;
+table tr {
+  border-bottom: 1px solid;
 }
 th,
 td {
