@@ -176,3 +176,6 @@ function CreateNewProduct() {
   $("#ModalCreateProduct").modal("hide");
   handleShowProduct();
 }
+function handleLogin() {
+  $("#loginModal").modal("show");
+}

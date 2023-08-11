@@ -15,6 +15,11 @@ header .navbar .nav_end .nav-item {
   display: flex;
   align-items: center;
 }
+header .navbar .nav_end .nav-item .header_btn {
+  border: none;
+  background: none;
+  margin-right: 20px;
+}
 
 .banner {
   padding-bottom: 30px;

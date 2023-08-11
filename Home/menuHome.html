@@ -20,12 +20,139 @@
       </div>
       <div class="navbar-nav nav_end">
         <div class="nav-item">
-          <span><i class="fa-solid fa-right-to-bracket"></i></span>
-          <a class="nav-link" href="#">Log in</a>
+          <button type="button" class="header_btn" onclick="handleLogin()">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Log in
+          </button>
         </div>
         <div class="nav-item">
-          <span><i class="fa-solid fa-user-plus"></i></span>
-          <a class="nav-link" href="#">Sign up</a>
+          <button type="button" class="header_btn" onclick="handleSignUp()">
+            <i class="fa-solid fa-user-plus"></i>
+            Sign up
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
+  <!-- modal login -->
+  <div
+    class="modal fade"
+    id="loginModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="exampleModalLabel">Login</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="col-form-label">User Name:</label>
+              <input type="text" class="form-control" id="userNameLogin" />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Password:</label>
+              <input type="password" class="form-control" id="passwordLogin" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal sign up -->
+  <div
+    class="modal fade"
+    id="signUpModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="exampleModalLabel">
+            Registration Account
+          </h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="col-form-label">Full Name:</label>
+              <input type="text" class="form-control" id="fullNameRegister" />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Address:</label>
+              <input type="text" class="form-control" id="addressRegister" />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Phone Number:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="phoneNumberRegister"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">E-mail:</label>
+              <input type="email" class="form-control" id="mailRegister" />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">User Name:</label>
+              <input type="text" class="form-control" id="userNameRegister" />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="passwordRegister"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Confirm Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPasswordRegister"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Registration</button>
         </div>
       </div>
     </div>

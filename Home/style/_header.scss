@@ -13,6 +13,11 @@ header {
       .nav-item {
         display: flex;
         align-items: center;
+        .header_btn {
+          border: none;
+          background: none;
+          margin-right: 20px;
+        }
       }
     }
   }
