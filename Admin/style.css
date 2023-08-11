@@ -25,6 +25,11 @@ header .navbar .nav_end .nav-item {
   display: flex;
   align-items: center;
 }
+.header_btn {
+  border: none;
+  background: none;
+  margin-right: 20px;
+}
 #side_bar {
   grid-area: 2/1/4/2;
 }
