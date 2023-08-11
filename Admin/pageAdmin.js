@@ -68,6 +68,7 @@ var listCategory = [
     name: "Laptop",
   },
 ];
+let indexOfProduct;
 $(function () {
   $("#head_menu").load("./menuAdmin.html");
   $("#side_bar").load("./sideBar.html");
@@ -101,7 +102,7 @@ function fetchListProduct() {
         <td>${nameOfCategory(product.categoryId)}</td>
         <td>
         <button
-            onclick="handleEditProduct()"
+            onclick="handleEditProduct(${product.id})"
             type="button"
             class="btn btn-warning"
             >
@@ -128,6 +129,50 @@ function nameOfCategory(categoryId) {
 function handleCreateProduct() {
   $("#ModalCreateProduct").modal("show");
 }
-function handleEditProduct() {
+function handleEditProduct(id) {
   $("#ModalUpdateProduct").modal("show");
+  indexOfProduct = id - 1;
+  showInfoOfProduct(listProduct[indexOfProduct]);
+}
+function showInfoOfProduct(product) {
+  $("#IdUpdate").val(product.id);
+  $("#NameUpdate").val(product.name);
+  $("#PriceUpdate").val(product.price);
+  $("#InfoUpdate").val(product.info);
+  $("#DetailUpdate").val(product.detail);
+  $("#StarUpdate").val(product.ratingStar);
+  $("#ImageUpdate").val(product.imageName);
+  $("#ManufacturerUpdate").val(product.manufacturerId);
+  $("#CategoryUpdate").val(product.categoryId);
+}
+function handleUpdateProduct() {
+  listProduct[indexOfProduct].name = $("#NameUpdate").val();
+  listProduct[indexOfProduct].price = $("#PriceUpdate").val();
+  listProduct[indexOfProduct].info = $("#InfoUpdate").val();
+  listProduct[indexOfProduct].detail = $("#DetailUpdate").val();
+  listProduct[indexOfProduct].ratingStar = $("#StarUpdate").val();
+  listProduct[indexOfProduct].imageName = $("#ImageUpdate").val();
+  listProduct[indexOfProduct].manufacturerId = $("#ManufacturerUpdate").val();
+  listProduct[indexOfProduct].categoryId = $("#CategoryUpdate").val();
+  $("#ModalUpdateProduct").modal("hide");
+  handleShowProduct();
+}
+function handleResetUpdate() {
+  showInfoOfProduct(listProduct[indexOfProduct]);
+}
+function CreateNewProduct() {
+  const data = {
+    name: $("#Name").val(),
+    price: $("#Price").val(),
+    info: $("#Info").val(),
+    detail: $("#Detail").val(),
+    ratingStar: $("#Star").val(),
+    imageName: $("#Image").val(),
+    manufacturerId: $("#Manufacturer").val(),
+    categoryId: $("#Category").val(),
+    id: listProduct.length + 1,
+  };
+  listProduct.push(data);
+  $("#ModalCreateProduct").modal("hide");
+  handleShowProduct();
 }
