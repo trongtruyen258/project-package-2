@@ -11,12 +11,19 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://js.upload.io/upload-js/v2"></script>
   </head>
   <body>
     <header id="head_menu"></header>
 
-    <div id="side_bar"></div>
+    <div class="side_bar">
+      <nav class="nav_left">
+        <div id="side_bar"></div>
+        <div id="filter_manufacturer"></div>
+        <div id="filter_category"></div>
+      </nav>
+    </div>
     <div class="search">
       <form action="">
         <input type="text" class="form-control" />
@@ -38,6 +45,7 @@
       src="https://kit.fontawesome.com/9ede67ff94.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="./pageAdmin.js"></script>
   </body>
 </html>

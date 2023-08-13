@@ -4,6 +4,9 @@
   padding: 0;
   border-radius: 5px;
 }
+::-webkit-scrollbar {
+  width: 0px;
+}
 body {
   display: grid;
   gap: 15px;
@@ -30,11 +33,11 @@ header .navbar .nav_end .nav-item {
   background: none;
   margin-right: 20px;
 }
-#side_bar {
-  grid-area: 2/1/4/2;
+#CategoryFilter {
+  margin-bottom: 5px;
 }
-.nav_left {
-  flex-direction: column;
+.side_bar {
+  grid-area: 2/1/4/2;
 }
 .nav_left h3 {
   margin: 15px 0;
@@ -69,6 +72,10 @@ header .navbar .nav_end .nav-item {
 .nav_left button {
   padding: 5px;
   border-radius: 5px;
+}
+.scrollList {
+  height: 167px;
+  overflow-y: scroll;
 }
 .search {
   grid-area: 2/2/3/3;

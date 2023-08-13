@@ -28,21 +28,25 @@ header .navbar .nav_end .nav-item .header_btn {
   width: 100%;
 }
 
-.container .product_img img {
+.container .row {
+  margin-bottom: 15px;
+}
+.container .row .product_img img {
   max-width: 100%;
 }
-.container .product_info .rating {
+.container .row .product_info .rating {
   color: #ffa500;
 }
-.container .product_info .price {
+.container .row .product_info .price {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.container .product_info .price p {
+.container .row .product_info .price p {
   margin: 0;
 }
-.container .product_info .price button {
+.container .row .product_info .price button {
   border: none;
   margin-right: 20px;
+  color: red;
 }/*# sourceMappingURL=style.css.map */
