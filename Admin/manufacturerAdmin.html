@@ -1,0 +1,115 @@
+<button type="button" class="btn btn-info" onclick="handleCreateManufacturer()">
+  Add New
+</button>
+<table>
+  <thead>
+    <th>Id</th>
+    <th>Manufacturer</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody id="tbManufacturerAdmin"></tbody>
+</table>
+<!-- Modal -->
+<!-- Modal create Category -->
+<div id="ModalCreateManufacturer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5">Create New Manufacturer</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="manufacturerName"
+              placeholder="Input Name"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group text-end">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="CreateNewManufacturer()"
+            >
+              Save
+            </button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Update Category -->
+<div id="ModalUpdateManufacturer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5">Update Manufacturer</h4>
+      </div>
+      <div class="modal-body">
+        <!-- <p>Some text in the modal.</p> -->
+
+        <form>
+          <div class="form-group">
+            <label>Id</label>
+            <input
+              type="number"
+              class="form-control"
+              id="IdManufacturerUpdate"
+              disabled
+            />
+          </div>
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="manufacturerNameUpdate"
+              required
+            />
+          </div>
+          <br />
+          <div class="form-group text-end">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="handleUpdateManufacturer()"
+            >
+              Update
+            </button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              onclick="handleResetUpdateManufacturer()"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </form>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+</div>
