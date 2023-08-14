@@ -1,22 +1,25 @@
 <button type="button" class="btn btn-info" onclick="handleCreateProduct()">
   Add New
 </button>
-<table>
-  <thead>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Info</th>
-    <th>Detail</th>
-    <th>Star</th>
-    <th>Image</th>
-    <th>NSX</th>
-    <th>Category</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </thead>
-  <tbody id="tbProductAdmin"></tbody>
-</table>
+<div class="tableContent">
+  <table>
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Info</th>
+      <th>Detail</th>
+      <th>Star</th>
+      <th>Image</th>
+      <th>NSX</th>
+      <th>Category</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody id="tbProductAdmin"></tbody>
+  </table>
+</div>
+
 <!-- Modal -->
 <!-- Modal create product -->
 <div id="ModalCreateProduct" class="modal fade" role="dialog">
@@ -266,14 +269,3 @@
     </div>
   </div>
 </div>
-<nav class="nav_pagi">
-  <ul class="pagination">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">1</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">4</a></li>
-    <li class="page-item"><a class="page-link" href="#">5</a></li>
-  </ul>
-</nav>

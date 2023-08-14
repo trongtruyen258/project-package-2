@@ -5,28 +5,27 @@
   border-radius: 5px;
 }
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 5px;
 }
-body {
-  display: grid;
-  gap: 15px;
-  padding: 0 10px 10px;
-  grid-template-columns: 15% auto;
-  grid-template-rows: auto 60px auto;
+::-webkit-scrollbar-thumb {
+  background: #9c9a9a;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6b6a6a;
+  border-radius: 5px;
+}
+.container {
+  max-width: 90%;
 }
 header {
-  grid-area: 1/1/2/3;
+  margin-bottom: 5px;
 }
 header .navbar {
   background-color: #fed100 !important;
 }
-header .navbar .nav_end {
-  position: absolute;
-  right: 0;
-}
-header .navbar .nav_end .nav-item {
-  display: flex;
-  align-items: center;
+.collapse {
+  justify-content: space-between;
 }
 .header_btn {
   border: none;
@@ -35,9 +34,6 @@ header .navbar .nav_end .nav-item {
 }
 #CategoryFilter {
   margin-bottom: 5px;
-}
-.side_bar {
-  grid-area: 2/1/4/2;
 }
 .nav_left h3 {
   margin: 15px 0;
@@ -78,11 +74,9 @@ header .navbar .nav_end .nav-item {
   overflow-y: scroll;
 }
 .search {
-  grid-area: 2/2/3/3;
+  margin-bottom: 10px;
   border: 1px solid black;
-  padding: 0 15px;
-  display: grid;
-  align-items: center;
+  padding: 5px 10px;
 }
 .search input {
   width: 60%;
@@ -96,13 +90,21 @@ header .navbar .nav_end .nav-item {
 }
 .main {
   border: 1px solid;
-  grid-area: 3/2/4/3;
   padding: 10px;
-  position: relative;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.main .nav_pagi {
-  position: absolute;
-  bottom: 0;
+
+.tableContent {
+  overflow-x: auto;
+}
+.pagination {
+  margin: 0 !important;
+}
+.nav_pagi {
+  margin-top: 10px;
 }
 table {
   text-align: center;
@@ -113,7 +115,7 @@ table tr {
 }
 th,
 td {
-  padding: 10px;
+  padding: 5px;
 }
 .bnt_edit {
   padding: 0 10px;

@@ -26,7 +26,7 @@ function fetchSelectManufacturerFilter() {
   listManufacturer.forEach((manufacturer) => {
     manufacturerFilter += `
     <li class="nav_item">
-    <button type="button" onclick="handleShowManufacturer${manufacturer.name}()">
+    <button type="button" onclick="filterByManufacturer(${manufacturer.id})">
       ${manufacturer.name}
     </button>
   </li>
@@ -45,8 +45,9 @@ function fetchSelectCategoryFilter() {
 function handleShowProduct() {
   $("#main_content").empty();
   $("#main_content").load("./productAdmin.html");
+  fetchPagination(listProduct, 5);
   setTimeout(() => {
-    fetchListProduct();
+    fetchListProduct(listProduct);
     fetchSelectCategory();
     fetchSelectManufacturer();
     fetchSelectCategoryUpdate();
@@ -89,9 +90,9 @@ function handleShowAccount() {
   $("#main_content").empty();
   $("#main_content").load("./accountAdmin.html");
 }
-function fetchListProduct() {
+function fetchListProduct(listProductToFetch) {
   $("#tbProductAdmin").empty();
-  listProduct.forEach((product) => {
+  paginate(listProductToFetch, 1, 5).forEach((product) => {
     $("#tbProductAdmin").append(`
     <tr style="vertical-align: middle">
         <td>${product.id}</td>
@@ -133,6 +134,35 @@ function fetchListProduct() {
     `);
   });
 }
+function fetchPagination(array, numberOnPage) {
+  $("#pagination").empty();
+  let pagination = ``;
+  let numberOfPage;
+  if (array.length <= numberOnPage) {
+    numberOfPage = 1;
+  } else {
+    if (array.length % numberOnPage !== 0) {
+      numberOfPage = parseInt(array.length / numberOnPage) + 1;
+    } else {
+      numberOfPage = array.length / numberOnPage;
+    }
+  }
+  for (let i = 1; i <= numberOfPage; i++) {
+    pagination += `
+    <button
+        type="button"
+        onclick='fetchListProduct(paginate(${JSON.stringify(
+          array
+        )}, ${i}, ${numberOnPage}))'
+        class="btn btn-outline-dark"
+      >
+        ${i}
+      </button>
+    `;
+  }
+  $("#pagination").append(pagination);
+}
+
 function handleCreateProduct() {
   $("#ModalCreateProduct").modal("show");
   $("#Name").val("");
@@ -206,13 +236,16 @@ function handleUpdateProduct() {
   listProduct[indexUpdate].categoryId = $("#CategoryUpdate").val();
   localStorage.setItem("listProduct", JSON.stringify(listProduct));
   $("#ModalUpdateProduct").modal("hide");
-  fetchListProduct();
+  let currentPage = parseInt(indexUpdate / 5) + 1;
+  fetchListProduct(paginate(listProduct, currentPage, 5));
+  fetchPagination(listProduct, 5);
 }
 function handleResetUpdate() {
   showInfoOfProduct(listProduct[indexUpdate]);
 }
 function handleDeleteProduct(id) {
   const index = listProduct.findIndex((product) => +product.id === +id);
+  let currentPage = parseInt(index / 5) + 1;
   swal({
     title: "Are you sure?",
     text: "Once deleted, you will not be able to recover this product!",
@@ -223,7 +256,8 @@ function handleDeleteProduct(id) {
     if (willDelete) {
       listProduct.splice(index, 1);
       localStorage.setItem("listProduct", JSON.stringify(listProduct));
-      fetchListProduct();
+      fetchListProduct(paginate(listProduct, currentPage, 5));
+      fetchPagination(listProduct, 5);
       swal("Poof! Product has been deleted!", {
         icon: "success",
       });
@@ -246,7 +280,8 @@ function CreateNewProduct() {
   };
   listProduct.push(data);
   $("#ModalCreateProduct").modal("hide");
-  fetchListProduct();
+  fetchListProduct(listProduct);
+  fetchPagination(listProduct, 5);
   localStorage.setItem("listProduct", JSON.stringify(listProduct));
 }
 function handleLogin() {
@@ -255,6 +290,7 @@ function handleLogin() {
 function handleShowManufacturer() {
   $("#main_content").empty();
   $("#main_content").load("./manufacturerAdmin.html");
+  fetchPagination(listManufacturer, 6);
   setTimeout(() => {
     fetchListManufacturer();
   }, 500);
@@ -262,6 +298,7 @@ function handleShowManufacturer() {
 function fetchListManufacturer() {
   $("#tbManufacturerAdmin").empty();
   listManufacturer.forEach((manufacturer) => {
+    //not edited pagination yet
     $("#tbManufacturerAdmin").append(`
     <tr style="vertical-align: middle">
         <td>${manufacturer.id}</td>
@@ -296,6 +333,7 @@ function CreateNewManufacturer() {
   fetchListManufacturer();
   $("#ModalCreateManufacturer").modal("hide");
   fetchSelectManufacturerFilter();
+  fetchPagination(listManufacturer, 6);
 }
 function handleEditManufacturer(id) {
   $("#ModalUpdateManufacturer").modal("show");
@@ -310,6 +348,7 @@ function handleUpdateManufacturer() {
   localStorage.setItem("listManufacturer", JSON.stringify(listManufacturer));
   fetchListManufacturer();
   fetchSelectManufacturerFilter();
+  fetchPagination(listManufacturer, 6);
   $("#ModalUpdateManufacturer").modal("hide");
 }
 function handleResetUpdateManufacturer() {
@@ -336,6 +375,7 @@ function handleDeleteManufacturer(id) {
       );
       fetchListManufacturer();
       fetchSelectManufacturerFilter();
+      fetchPagination(listManufacturer, 6);
       swal("Poof! Manufacturer has been deleted!", {
         icon: "success",
       });
@@ -347,6 +387,7 @@ function handleDeleteManufacturer(id) {
 function handleShowCategory() {
   $("#main_content").empty();
   $("#main_content").load("./categoryAdmin.html");
+  fetchPagination(listCategory, 6);
   setTimeout(() => {
     fetchListCategory();
   }, 500);
@@ -354,6 +395,7 @@ function handleShowCategory() {
 function fetchListCategory() {
   $("#tbCategoryAdmin").empty();
   listCategory.forEach((category) => {
+    //not edited pagination yet
     $("#tbCategoryAdmin").append(`
     <tr style="vertical-align: middle">
         <td>${category.id}</td>
@@ -386,6 +428,7 @@ function CreateNewCategory() {
   listCategory.push(newCategory);
   localStorage.setItem("listCategory", JSON.stringify(listCategory));
   fetchListCategory();
+  fetchPagination(listCategory, 6);
   $("#ModalCreateCategory").modal("hide");
   fetchSelectCategoryFilter();
 }
@@ -399,6 +442,7 @@ function handleUpdateCategory() {
   listCategory[indexUpdate].name = $("#categoryNameUpdate").val();
   localStorage.setItem("listCategory", JSON.stringify(listCategory));
   fetchListCategory();
+  fetchPagination(listCategory, 6);
   fetchSelectCategoryFilter();
   $("#ModalUpdateCategory").modal("hide");
 }
@@ -419,6 +463,7 @@ function handleDeleteCategory(id) {
       listCategory.splice(index, 1);
       localStorage.setItem("listCategory", JSON.stringify(listCategory));
       fetchListCategory();
+      fetchPagination(listCategory, 6);
       fetchSelectCategoryFilter();
       swal("Poof! Category has been deleted!", {
         icon: "success",
@@ -428,3 +473,34 @@ function handleDeleteCategory(id) {
     }
   });
 }
+function filterByCategory() {
+  const filterCategory = $("#CategoryFilter").val();
+  const listProductFilterCategory = listProduct.filter(
+    (product) => +product.categoryId === +filterCategory
+  );
+  fetchPagination(listProductFilterCategory, 5);
+  fetchListProduct(listProductFilterCategory); ////not edited yet
+}
+function filterByManufacturer(manufacturerId) {
+  const listProductFilterManufacturer = listProduct.filter(
+    (product) => +product.manufacturerId === +manufacturerId
+  );
+  fetchPagination(listProductFilterManufacturer, 5);
+  fetchListProduct(listProductFilterManufacturer); //not edited yet
+}
+const paginate = function (array, index, size) {
+  // transform values
+  index = Math.abs(parseInt(index));
+  index = index > 0 ? index - 1 : index;
+  size = parseInt(size);
+  size = size < 1 ? 1 : size;
+  if (Array.isArray(array) != true) {
+    array = JSON.parse(array);
+  }
+  // filter
+  return [
+    ...array.filter((value, n) => {
+      return n >= index * size && n < (index + 1) * size;
+    }),
+  ];
+};
