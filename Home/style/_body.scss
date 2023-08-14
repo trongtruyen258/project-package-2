@@ -1,26 +1,29 @@
 .container {
   .row {
-    margin-bottom: 15px;
-    .product_img {
-      img {
-        max-width: 100%;
-      }
-    }
-    .product_info {
-      .rating {
-        color: $rate_color;
-      }
-      .price {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        p {
-          margin: 0;
+    .tagProduct {
+      margin-bottom: 15px;
+      .product_img {
+        img {
+          max-width: 100%;
         }
-        button {
-          border: none;
-          margin-right: 20px;
-          color: red;
+      }
+      .product_info {
+        .rating {
+          color: $rate_color;
+        }
+        .price {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          p {
+            margin: 0;
+          }
+          button {
+            background: none;
+            border: none;
+            margin-right: 20px;
+            color: red;
+          }
         }
       }
     }

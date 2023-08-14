@@ -16,21 +16,49 @@
   </head>
   <body>
     <header id="head_menu"></header>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-2 col-lg-3 col-md-3 col-7">
+          <div class="side_bar">
+            <nav class="nav_left">
+              <div id="side_bar"></div>
+              <div id="filter_manufacturer"></div>
+              <div id="filter_category"></div>
+            </nav>
+          </div>
+        </div>
+        <div class="col-xl-10 col-lg-9 col-md-9 col-12">
+          <div class="row">
+            <div class="search">
+              <form action="">
+                <input type="text" class="form-control" />
+                <button type="button" class="btn btn-success">Search</button>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="main">
+              <div id="main_content"></div>
+              <nav class="nav_pagi">
+                <div
+                  class="btn-toolbar mb-3 pagination"
+                  role="toolbar"
+                  aria-label="Toolbar with button groups"
+                >
+                  <div
+                    class="btn-group me-2"
+                    role="group"
+                    aria-label="First group"
+                    id="pagination"
+                  ></div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div class="side_bar">
-      <nav class="nav_left">
-        <div id="side_bar"></div>
-        <div id="filter_manufacturer"></div>
-        <div id="filter_category"></div>
-      </nav>
-    </div>
-    <div class="search">
-      <form action="">
-        <input type="text" class="form-control" />
-        <button type="button" class="btn btn-success">Search</button>
-      </form>
-    </div>
-    <div class="main" id="main_content"></div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

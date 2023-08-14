@@ -15,7 +15,7 @@ function fetchListProduct() {
   let divListProduct = ``;
   listProduct.forEach((product) => {
     divListProduct += `
-    <div class="col-xl-3">
+    <div class="col-xl-3 tagProduct">
     <div class="product_img">
       <img
         src="${product.imageName}"

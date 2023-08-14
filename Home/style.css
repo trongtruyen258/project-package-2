@@ -28,24 +28,25 @@ header .navbar .nav_end .nav-item .header_btn {
   width: 100%;
 }
 
-.container .row {
+.container .row .tagProduct {
   margin-bottom: 15px;
 }
-.container .row .product_img img {
+.container .row .tagProduct .product_img img {
   max-width: 100%;
 }
-.container .row .product_info .rating {
+.container .row .tagProduct .product_info .rating {
   color: #ffa500;
 }
-.container .row .product_info .price {
+.container .row .tagProduct .product_info .price {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.container .row .product_info .price p {
+.container .row .tagProduct .product_info .price p {
   margin: 0;
 }
-.container .row .product_info .price button {
+.container .row .tagProduct .product_info .price button {
+  background: none;
   border: none;
   margin-right: 20px;
   color: red;
