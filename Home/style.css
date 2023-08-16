@@ -20,6 +20,12 @@ header .navbar .nav_end .nav-item .header_btn {
   background: none;
   margin-right: 20px;
 }
+header .navbar .nav_end #bnt_logout {
+  display: none;
+}
+header .navbar .nav_end #bnt_login {
+  display: none;
+}
 
 .banner {
   padding-bottom: 30px;

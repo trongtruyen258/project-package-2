@@ -16,10 +16,16 @@
         <a class="nav-link active" aria-current="page" href="./index.html"
           >Home</a
         >
-        <a class="nav-link" href="../Admin/index.html">Admin</a>
+        <a class="nav-link" href="#" onclick="goToAdmin()">Admin</a>
       </div>
       <div class="navbar-nav nav_end">
-        <div class="nav-item">
+        <div class="nav-item" id="bnt_logout">
+          <button type="button" class="header_btn" onclick="handleLogout()">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Log out
+          </button>
+        </div>
+        <div class="nav-item" id="bnt_login">
           <button type="button" class="header_btn" onclick="handleLogin()">
             <i class="fa-solid fa-right-to-bracket"></i>
             Log in
@@ -67,6 +73,16 @@
           </form>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="goRegister()">
+            Register Account
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="loginAccount()"
+          >
+            Login
+          </button>
           <button
             type="button"
             class="btn btn-secondary"
@@ -74,7 +90,6 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Login</button>
         </div>
       </div>
     </div>
@@ -91,7 +106,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title fs-5" id="exampleModalLabel">
-            Registration Account
+            Register Account
           </h4>
           <button
             type="button"
@@ -113,7 +128,7 @@
             <div class="mb-3">
               <label class="col-form-label">Phone Number:</label>
               <input
-                type="number"
+                type="text"
                 class="form-control"
                 id="phoneNumberRegister"
               />
@@ -152,7 +167,13 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Registration</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="registerAccount()"
+          >
+            Register
+          </button>
         </div>
       </div>
     </div>

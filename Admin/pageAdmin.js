@@ -1,10 +1,10 @@
 let indexUpdate;
-
+let listToPaginate = "";
 const upload = Upload({
   // Get production API keys from Upload.io
   apiKey: "free",
 });
-let listProduct = JSON.parse(localStorage.getItem("listProduct")) ?? [];
+let listProduct = [];
 let listManufacturer =
   JSON.parse(localStorage.getItem("listManufacturer")) ?? [];
 let listCategory = JSON.parse(localStorage.getItem("listCategory")) ?? [];
@@ -13,9 +13,15 @@ $(function () {
   $("#side_bar").load("./sideBar.html");
   $("#filter_manufacturer").load("./filterManufacturerAdmin.html");
   $("#filter_category").load("./filterCategoryAdmin.html");
-
-  handleShowProduct();
+  $.ajax({
+    url: "https://64dba28a593f57e435b13ebd.mockapi.io/products",
+    type: "GET",
+    success: function (res, status) {
+      listProduct = res ?? [];
+    },
+  });
   setTimeout(() => {
+    handleShowProduct();
     fetchSelectCategoryFilter();
     fetchSelectManufacturerFilter();
   }, 500);
@@ -45,6 +51,7 @@ function fetchSelectCategoryFilter() {
 function handleShowProduct() {
   $("#main_content").empty();
   $("#main_content").load("./productAdmin.html");
+  listToPaginate = "Product";
   fetchPagination(listProduct, 5);
   setTimeout(() => {
     fetchListProduct(listProduct);
@@ -151,9 +158,9 @@ function fetchPagination(array, numberOnPage) {
     pagination += `
     <button
         type="button"
-        onclick='fetchListProduct(paginate(${JSON.stringify(
-          array
-        )}, ${i}, ${numberOnPage}))'
+        onclick='fetchList${listToPaginate}(paginate(${JSON.stringify(
+      array
+    )}, ${i}, ${numberOnPage}))'
         class="btn btn-outline-dark"
       >
         ${i}
@@ -226,25 +233,42 @@ function showInfoOfProduct(product) {
   $("#CategoryUpdate").val(product.categoryId);
 }
 function handleUpdateProduct() {
-  listProduct[indexUpdate].name = $("#NameUpdate").val();
-  listProduct[indexUpdate].price = $("#PriceUpdate").val();
-  listProduct[indexUpdate].info = $("#InfoUpdate").val();
-  listProduct[indexUpdate].detail = $("#DetailUpdate").val();
-  listProduct[indexUpdate].ratingStar = $("#StarUpdate").val();
-  listProduct[indexUpdate].imageName = $("#ImageUpdate").val();
-  listProduct[indexUpdate].manufacturerId = $("#ManufacturerUpdate").val();
-  listProduct[indexUpdate].categoryId = $("#CategoryUpdate").val();
-  localStorage.setItem("listProduct", JSON.stringify(listProduct));
+  //not edited yet
+  const data = {
+    name: $("#NameUpdate").val(),
+    price: $("#PriceUpdate").val(),
+    info: $("#InfoUpdate").val(),
+    detail: $("#DetailUpdate").val(),
+    ratingStar: $("#StarUpdate").val(),
+    imageName: $("#ImageUpdate").val(),
+    manufacturerId: $("#ManufacturerUpdate").val(),
+    categoryId: $("#CategoryUpdate").val(),
+  };
   $("#ModalUpdateProduct").modal("hide");
-  let currentPage = parseInt(indexUpdate / 5) + 1;
-  fetchListProduct(paginate(listProduct, currentPage, 5));
-  fetchPagination(listProduct, 5);
+  $.ajax({
+    url: `https://64dba28a593f57e435b13ebd.mockapi.io/products/${listProduct[indexUpdate].id}`,
+    type: "PUT",
+    data: data,
+  });
+  setTimeout(() => {
+    $.ajax({
+      url: "https://64dba28a593f57e435b13ebd.mockapi.io/products",
+      type: "GET",
+      success: function (res, status) {
+        listProduct = res ?? [];
+        let currentPage = parseInt(indexUpdate / 5) + 1;
+        fetchListProduct(paginate(listProduct, currentPage, 5));
+        listToPaginate = "Product";
+        fetchPagination(listProduct, 5);
+      },
+    });
+  }, 500);
 }
 function handleResetUpdate() {
   showInfoOfProduct(listProduct[indexUpdate]);
 }
 function handleDeleteProduct(id) {
-  const index = listProduct.findIndex((product) => +product.id === +id);
+  let index = listProduct.findIndex((product) => +product.id === +id);
   let currentPage = parseInt(index / 5) + 1;
   swal({
     title: "Are you sure?",
@@ -254,10 +278,22 @@ function handleDeleteProduct(id) {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      listProduct.splice(index, 1);
-      localStorage.setItem("listProduct", JSON.stringify(listProduct));
-      fetchListProduct(paginate(listProduct, currentPage, 5));
-      fetchPagination(listProduct, 5);
+      $.ajax({
+        url: `https://64dba28a593f57e435b13ebd.mockapi.io/products/${id}`,
+        type: "DELETE",
+      });
+      setTimeout(() => {
+        $.ajax({
+          url: "https://64dba28a593f57e435b13ebd.mockapi.io/products",
+          type: "GET",
+          success: function (res, status) {
+            listProduct = res ?? [];
+            fetchListProduct(paginate(listProduct, currentPage, 5));
+            listToPaginate = "Product";
+            fetchPagination(listProduct, 5);
+          },
+        });
+      }, 500);
       swal("Poof! Product has been deleted!", {
         icon: "success",
       });
@@ -276,29 +312,56 @@ function CreateNewProduct() {
     imageName: $("#Image").val(),
     manufacturerId: $("#Manufacturer").val(),
     categoryId: $("#Category").val(),
-    id: Math.floor(Math.random() * 100) + 1,
   };
-  listProduct.push(data);
-  $("#ModalCreateProduct").modal("hide");
-  fetchListProduct(listProduct);
-  fetchPagination(listProduct, 5);
-  localStorage.setItem("listProduct", JSON.stringify(listProduct));
+  $.ajax({
+    url: "https://64dba28a593f57e435b13ebd.mockapi.io/products",
+    type: "POST",
+    data: data,
+  });
+  setTimeout(() => {
+    $.ajax({
+      url: "https://64dba28a593f57e435b13ebd.mockapi.io/products",
+      type: "GET",
+      success: function (res, status) {
+        listProduct = res ?? [];
+        $("#ModalCreateProduct").modal("hide");
+        fetchListProduct(listProduct);
+        listToPaginate = "Product";
+        fetchPagination(listProduct, 5);
+      },
+    });
+  }, 1000);
 }
-function handleLogin() {
-  $("#loginModal").modal("show");
+function handleLogout() {
+  swal({
+    title: "Are you sure?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      localStorage.setItem("isLoggedIn", false);
+      swal("You are Logged out!", {
+        icon: "success",
+      });
+      setTimeout(() => {
+        location.href = "../Home/index.html";
+      }, 1000);
+    }
+  });
 }
 function handleShowManufacturer() {
   $("#main_content").empty();
   $("#main_content").load("./manufacturerAdmin.html");
+  listToPaginate = "Manufacturer";
   fetchPagination(listManufacturer, 6);
   setTimeout(() => {
-    fetchListManufacturer();
+    fetchListManufacturer(listManufacturer);
   }, 500);
 }
-function fetchListManufacturer() {
+function fetchListManufacturer(listManufacturerToFetch) {
   $("#tbManufacturerAdmin").empty();
-  listManufacturer.forEach((manufacturer) => {
-    //not edited pagination yet
+  paginate(listManufacturerToFetch, 1, 6).forEach((manufacturer) => {
     $("#tbManufacturerAdmin").append(`
     <tr style="vertical-align: middle">
         <td>${manufacturer.id}</td>
@@ -330,9 +393,10 @@ function CreateNewManufacturer() {
   };
   listManufacturer.push(newManufacturer);
   localStorage.setItem("listManufacturer", JSON.stringify(listManufacturer));
-  fetchListManufacturer();
+  fetchListManufacturer(listManufacturer);
   $("#ModalCreateManufacturer").modal("hide");
   fetchSelectManufacturerFilter();
+  listToPaginate = "Manufacturer";
   fetchPagination(listManufacturer, 6);
 }
 function handleEditManufacturer(id) {
@@ -346,8 +410,10 @@ function handleEditManufacturer(id) {
 function handleUpdateManufacturer() {
   listManufacturer[indexUpdate].name = $("#manufacturerNameUpdate").val();
   localStorage.setItem("listManufacturer", JSON.stringify(listManufacturer));
-  fetchListManufacturer();
+  let currentPage = parseInt(indexUpdate / 6) + 1;
+  fetchListManufacturer(paginate(listManufacturer, currentPage, 6));
   fetchSelectManufacturerFilter();
+  listToPaginate = "Manufacturer";
   fetchPagination(listManufacturer, 6);
   $("#ModalUpdateManufacturer").modal("hide");
 }
@@ -373,8 +439,10 @@ function handleDeleteManufacturer(id) {
         "listManufacturer",
         JSON.stringify(listManufacturer)
       );
-      fetchListManufacturer();
+      let currentPage = parseInt(indexUpdate / 6) + 1;
+      fetchListManufacturer(paginate(listManufacturer, currentPage, 6));
       fetchSelectManufacturerFilter();
+      listToPaginate = "Manufacturer";
       fetchPagination(listManufacturer, 6);
       swal("Poof! Manufacturer has been deleted!", {
         icon: "success",
@@ -387,15 +455,15 @@ function handleDeleteManufacturer(id) {
 function handleShowCategory() {
   $("#main_content").empty();
   $("#main_content").load("./categoryAdmin.html");
+  listToPaginate = "Category";
   fetchPagination(listCategory, 6);
   setTimeout(() => {
-    fetchListCategory();
+    fetchListCategory(listCategory);
   }, 500);
 }
-function fetchListCategory() {
+function fetchListCategory(listCategoryToFetch) {
   $("#tbCategoryAdmin").empty();
-  listCategory.forEach((category) => {
-    //not edited pagination yet
+  paginate(listCategoryToFetch, 1, 6).forEach((category) => {
     $("#tbCategoryAdmin").append(`
     <tr style="vertical-align: middle">
         <td>${category.id}</td>
@@ -427,7 +495,8 @@ function CreateNewCategory() {
   };
   listCategory.push(newCategory);
   localStorage.setItem("listCategory", JSON.stringify(listCategory));
-  fetchListCategory();
+  fetchListCategory(listCategory);
+  listToPaginate = "Category";
   fetchPagination(listCategory, 6);
   $("#ModalCreateCategory").modal("hide");
   fetchSelectCategoryFilter();
@@ -441,7 +510,9 @@ function handleEditCategory(id) {
 function handleUpdateCategory() {
   listCategory[indexUpdate].name = $("#categoryNameUpdate").val();
   localStorage.setItem("listCategory", JSON.stringify(listCategory));
-  fetchListCategory();
+  let currentPage = parseInt(indexUpdate / 6) + 1;
+  fetchListCategory(paginate(listCategory, currentPage, 6));
+  listToPaginate = "Category";
   fetchPagination(listCategory, 6);
   fetchSelectCategoryFilter();
   $("#ModalUpdateCategory").modal("hide");
@@ -462,7 +533,9 @@ function handleDeleteCategory(id) {
     if (willDelete) {
       listCategory.splice(index, 1);
       localStorage.setItem("listCategory", JSON.stringify(listCategory));
-      fetchListCategory();
+      let currentPage = parseInt(indexUpdate / 6) + 1;
+      fetchListCategory(paginate(listCategory, currentPage, 6));
+      listToPaginate = "Category";
       fetchPagination(listCategory, 6);
       fetchSelectCategoryFilter();
       swal("Poof! Category has been deleted!", {
@@ -478,15 +551,17 @@ function filterByCategory() {
   const listProductFilterCategory = listProduct.filter(
     (product) => +product.categoryId === +filterCategory
   );
+  listToPaginate = "Product";
   fetchPagination(listProductFilterCategory, 5);
-  fetchListProduct(listProductFilterCategory); ////not edited yet
+  fetchListProduct(listProductFilterCategory);
 }
 function filterByManufacturer(manufacturerId) {
   const listProductFilterManufacturer = listProduct.filter(
     (product) => +product.manufacturerId === +manufacturerId
   );
+  listToPaginate = "Product";
   fetchPagination(listProductFilterManufacturer, 5);
-  fetchListProduct(listProductFilterManufacturer); //not edited yet
+  fetchListProduct(listProductFilterManufacturer);
 }
 const paginate = function (array, index, size) {
   // transform values
