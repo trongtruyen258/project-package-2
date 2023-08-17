@@ -26,6 +26,7 @@ $(function () {
     fetchSelectManufacturerFilter();
   }, 500);
 });
+//generate Manufacturer in Side Bar
 function fetchSelectManufacturerFilter() {
   $("#manufacturerFilter").empty();
   let manufacturerFilter = ``;
@@ -40,6 +41,7 @@ function fetchSelectManufacturerFilter() {
   });
   $("#manufacturerFilter").append(manufacturerFilter);
 }
+//generate Category in side bar
 function fetchSelectCategoryFilter() {
   $("#CategoryFilter").empty();
   let selectCategory = `<option value="0">Choose a Category</option>`;
@@ -48,6 +50,7 @@ function fetchSelectCategoryFilter() {
   });
   $("#CategoryFilter").append(selectCategory);
 }
+//show products in main content
 function handleShowProduct() {
   $("#main_content").empty();
   $("#main_content").load("./productAdmin.html");
@@ -93,10 +96,6 @@ function handleShowProduct() {
     });
   }, 1000);
 }
-function handleShowAccount() {
-  $("#main_content").empty();
-  $("#main_content").load("./accountAdmin.html");
-}
 function fetchListProduct(listProductToFetch) {
   $("#tbProductAdmin").empty();
   paginate(listProductToFetch, 1, 5).forEach((product) => {
@@ -141,6 +140,12 @@ function fetchListProduct(listProductToFetch) {
     `);
   });
 }
+//show list account in main content
+function handleShowAccount() {
+  $("#main_content").empty();
+  $("#main_content").load("./accountAdmin.html");
+}
+//generate paginate
 function fetchPagination(array, numberOnPage) {
   $("#pagination").empty();
   let pagination = ``;
@@ -169,7 +174,7 @@ function fetchPagination(array, numberOnPage) {
   }
   $("#pagination").append(pagination);
 }
-
+//show modal create new product
 function handleCreateProduct() {
   $("#ModalCreateProduct").modal("show");
   $("#Name").val("");
@@ -183,6 +188,7 @@ function handleCreateProduct() {
   $("#Manufacturer").val(0);
   $("#Category").val(0);
 }
+//generate Category in modal create new product
 function fetchSelectCategory() {
   $("#Category").empty();
   let selectCategory = `<option value="0">Choose a Category</option>`;
@@ -191,6 +197,7 @@ function fetchSelectCategory() {
   });
   $("#Category").append(selectCategory);
 }
+//generate Manufacturer in modal create new product
 function fetchSelectManufacturer() {
   $("#Manufacturer").empty();
   let selectManufacturer = `<option value="0">Choose a Manufacturer</option>`;
@@ -199,11 +206,13 @@ function fetchSelectManufacturer() {
   });
   $("#Manufacturer").append(selectManufacturer);
 }
+//show modal edit product
 function handleEditProduct(id) {
   $("#ModalUpdateProduct").modal("show");
   indexUpdate = listProduct.findIndex((product) => +product.id === +id);
   showInfoOfProduct(listProduct[indexUpdate]);
 }
+//generate Category in modal update product
 function fetchSelectCategoryUpdate() {
   $("#CategoryUpdate").empty();
   let selectCategory = `<option value="0">Choose a Category</option>`;
@@ -212,6 +221,7 @@ function fetchSelectCategoryUpdate() {
   });
   $("#CategoryUpdate").append(selectCategory);
 }
+//generate Manufacturer in modal update product
 function fetchSelectManufacturerUpdate() {
   $("#ManufacturerUpdate").empty();
   let selectManufacturer = `<option value="0">Choose a Manufacturer</option>`;
@@ -220,6 +230,7 @@ function fetchSelectManufacturerUpdate() {
   });
   $("#ManufacturerUpdate").append(selectManufacturer);
 }
+//show information of product being edited
 function showInfoOfProduct(product) {
   $("#IdUpdate").val(product.id);
   $("#NameUpdate").val(product.name);
@@ -232,6 +243,7 @@ function showInfoOfProduct(product) {
   $("#ManufacturerUpdate").val(product.manufacturerId);
   $("#CategoryUpdate").val(product.categoryId);
 }
+//update new information of product
 function handleUpdateProduct() {
   //not edited yet
   const data = {
@@ -265,9 +277,11 @@ function handleUpdateProduct() {
     });
   }, 500);
 }
+//reset the previous information of product
 function handleResetUpdate() {
   showInfoOfProduct(listProduct[indexUpdate]);
 }
+//delete product
 function handleDeleteProduct(id) {
   let index = listProduct.findIndex((product) => +product.id === +id);
   let currentPage = parseInt(index / 5) + 1;
@@ -303,6 +317,7 @@ function handleDeleteProduct(id) {
     }
   });
 }
+//create a new product
 function CreateNewProduct() {
   const data = {
     name: $("#Name").val(),
@@ -333,6 +348,7 @@ function CreateNewProduct() {
     });
   }, 1000);
 }
+//log out
 function handleLogout() {
   swal({
     title: "Are you sure?",
@@ -351,6 +367,7 @@ function handleLogout() {
     }
   });
 }
+//show list manufacturer in main content
 function handleShowManufacturer() {
   $("#main_content").empty();
   $("#main_content").load("./manufacturerAdmin.html");
@@ -383,10 +400,12 @@ function fetchListManufacturer(listManufacturerToFetch) {
     `);
   });
 }
+//show modal create new manufacturer
 function handleCreateManufacturer() {
   $("#ModalCreateManufacturer").modal("show");
   $("#manufacturerName").val("");
 }
+//create a new manufacturer
 function CreateNewManufacturer() {
   const newManufacturer = {
     id: Math.floor(Math.random() * 100) + 1,
@@ -400,6 +419,7 @@ function CreateNewManufacturer() {
   listToPaginate = "Manufacturer";
   fetchPagination(listManufacturer, 6);
 }
+//show modal edit manufacturer
 function handleEditManufacturer(id) {
   $("#ModalUpdateManufacturer").modal("show");
   indexUpdate = listManufacturer.findIndex(
@@ -408,6 +428,7 @@ function handleEditManufacturer(id) {
   $("#IdManufacturerUpdate").val(listManufacturer[indexUpdate].id);
   $("#ManufacturerNameUpdate").val(listManufacturer[indexUpdate].name);
 }
+//update information of manufacturer
 function handleUpdateManufacturer() {
   listManufacturer[indexUpdate].name = $("#manufacturerNameUpdate").val();
   localStorage.setItem("listManufacturer", JSON.stringify(listManufacturer));
@@ -418,11 +439,12 @@ function handleUpdateManufacturer() {
   fetchPagination(listManufacturer, 6);
   $("#ModalUpdateManufacturer").modal("hide");
 }
+//reset information of manufacturer
 function handleResetUpdateManufacturer() {
   $("#IdManufacturerUpdate").val(listManufacturer[indexUpdate].id);
   $("#manufacturerNameUpdate").val("");
 }
-
+//delete a manufacturer
 function handleDeleteManufacturer(id) {
   const index = listManufacturer.findIndex(
     (manufacturer) => manufacturer.id === +id
@@ -453,6 +475,7 @@ function handleDeleteManufacturer(id) {
     }
   });
 }
+//show list category in main content
 function handleShowCategory() {
   $("#main_content").empty();
   $("#main_content").load("./categoryAdmin.html");
@@ -485,10 +508,12 @@ function fetchListCategory(listCategoryToFetch) {
     `);
   });
 }
+//show modal create new category
 function handleCreateCategory() {
   $("#ModalCreateCategory").modal("show");
   $("#categoryName").val("");
 }
+//create a new category
 function CreateNewCategory() {
   const newCategory = {
     id: Math.floor(Math.random() * 100) + 1,
@@ -502,12 +527,14 @@ function CreateNewCategory() {
   $("#ModalCreateCategory").modal("hide");
   fetchSelectCategoryFilter();
 }
+//show modal edit a category
 function handleEditCategory(id) {
   $("#ModalUpdateCategory").modal("show");
   indexUpdate = listCategory.findIndex((category) => category.id === +id);
   $("#IdCategoryUpdate").val(listCategory[indexUpdate].id);
   $("#categoryNameUpdate").val(listCategory[indexUpdate].name);
 }
+//update information of category
 function handleUpdateCategory() {
   listCategory[indexUpdate].name = $("#categoryNameUpdate").val();
   localStorage.setItem("listCategory", JSON.stringify(listCategory));
@@ -518,10 +545,12 @@ function handleUpdateCategory() {
   fetchSelectCategoryFilter();
   $("#ModalUpdateCategory").modal("hide");
 }
+//reset information of category
 function handleResetUpdateCategory() {
   $("#IdCategoryUpdate").val(listCategory[indexUpdate].id);
   $("#categoryNameUpdate").val("");
 }
+//delete a category
 function handleDeleteCategory(id) {
   const index = listCategory.findIndex((category) => category.id === +id);
   swal({
@@ -547,6 +576,7 @@ function handleDeleteCategory(id) {
     }
   });
 }
+//show products are filtered by category
 function filterByCategory() {
   const filterCategory = $("#CategoryFilter").val();
   const listProductFilterCategory = listProduct.filter(
@@ -556,6 +586,7 @@ function filterByCategory() {
   fetchPagination(listProductFilterCategory, 5);
   fetchListProduct(listProductFilterCategory);
 }
+//show products are filtered by manufacturer
 function filterByManufacturer(manufacturerId) {
   const listProductFilterManufacturer = listProduct.filter(
     (product) => +product.manufacturerId === +manufacturerId
@@ -564,6 +595,7 @@ function filterByManufacturer(manufacturerId) {
   fetchPagination(listProductFilterManufacturer, 5);
   fetchListProduct(listProductFilterManufacturer);
 }
+//paginate
 const paginate = function (array, index, size) {
   // transform values
   index = Math.abs(parseInt(index));

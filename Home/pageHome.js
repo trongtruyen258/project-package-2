@@ -10,6 +10,7 @@ $(function () {
     fetchListProduct();
   }, 500);
 });
+//check user is logging
 function checkLogin() {
   if (JSON.parse(localStorage.getItem("isLoggedIn"))) {
     $("#bnt_logout").show();
@@ -17,6 +18,7 @@ function checkLogin() {
     $("#bnt_login").show();
   }
 }
+//show list product
 function fetchListProduct() {
   $.ajax({
     url: "https://64dba28a593f57e435b13ebd.mockapi.io/products",
@@ -58,6 +60,7 @@ function fetchListProduct() {
     },
   });
 }
+//generate star
 function fetchRatingStar(ratingStar) {
   let numberOfStar = ``;
   for (let index = 0; index < ratingStar; index++) {
@@ -65,12 +68,15 @@ function fetchRatingStar(ratingStar) {
   }
   return numberOfStar;
 }
+//show modal login
 function handleLogin() {
   $("#loginModal").modal("show");
 }
+//show modal register
 function handleSignUp() {
   $("#signUpModal").modal("show");
 }
+//create a new account
 function registerAccount() {
   if ($("#confirmPasswordRegister").val() !== $("#passwordRegister").val()) {
     swal("Oops!", "Password don't match!", "error");
@@ -93,6 +99,7 @@ function registerAccount() {
     });
   }
 }
+//login account
 function loginAccount() {
   $.ajax({
     url: "https://64dba28a593f57e435b13ebd.mockapi.io/users",
@@ -112,10 +119,12 @@ function loginAccount() {
     },
   });
 }
+//go to register account
 function goRegister() {
   $("#loginModal").modal("hide");
   $("#signUpModal").modal("show");
 }
+//go to page admin
 function goToAdmin() {
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   if (isLoggedIn) {
@@ -124,6 +133,7 @@ function goToAdmin() {
     swal("Oops!", "You're not logged in!", "error");
   }
 }
+//log out
 function handleLogout() {
   localStorage.setItem("isLoggedIn", false);
   $("#bnt_logout").hide();
