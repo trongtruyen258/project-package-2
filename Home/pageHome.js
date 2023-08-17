@@ -39,7 +39,7 @@ function fetchListProduct() {
       <p>Hãng sản xuất: ${
         listManufacturer.find(
           (element) => element.id === +product.manufacturerId
-        ).name
+        )?.name
       }</p>
       <div class="rating">
         ${fetchRatingStar(product.ratingStar)}

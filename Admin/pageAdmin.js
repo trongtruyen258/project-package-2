@@ -117,11 +117,11 @@ function fetchListProduct(listProductToFetch) {
         <td>${
           listManufacturer.find(
             (element) => element.id === +product.manufacturerId
-          ).name
+          )?.name
         }</td>
         <td>${
           listCategory.find((element) => element.id === +product.categoryId)
-            .name
+            ?.name
         }</td>
         <td>
         <button
@@ -244,7 +244,7 @@ function handleUpdateProduct() {
     manufacturerId: $("#ManufacturerUpdate").val(),
     categoryId: $("#CategoryUpdate").val(),
   };
-  $("#ModalUpdateProduct").modal("hide");
+
   $.ajax({
     url: `https://64dba28a593f57e435b13ebd.mockapi.io/products/${listProduct[indexUpdate].id}`,
     type: "PUT",
@@ -260,6 +260,7 @@ function handleUpdateProduct() {
         fetchListProduct(paginate(listProduct, currentPage, 5));
         listToPaginate = "Product";
         fetchPagination(listProduct, 5);
+        $("#ModalUpdateProduct").modal("hide");
       },
     });
   }, 500);
